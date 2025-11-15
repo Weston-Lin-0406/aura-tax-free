@@ -1,0 +1,35 @@
+database:
+  active: dev
+  application:
+    dev:
+      dialect: sqlite
+      driver:
+      server: 
+      port: 
+      database: ./resources/aura_tax_free_dev
+      username: root
+      password: root
+      show-sql: false
+    prod:
+      dialect: sqlite
+      driver: 
+      server:
+      port:
+      database: ./resources/aura_tax_free_prod
+      username: root
+      password: root
+      show-sql: false
+
+security:
+  jwt:
+    secret-key: aura # JWT secret key
+    expiration: 3 # days
+
+line:
+  active: dev
+  dev:
+    token: hEEvCISQuev+FSgy92+9Z2cJgpX2Z1rE18mC5Pe3TUkFMJfjDKvX0SUiUgB205OrJdrehc3Qvs4JYJSGrdRotOi2+aNWCY23QvB0IonsvT6xgDwusd7zRIy64oyZepOzFKrJDb9sQxJieJPIZk8FCgdB04t89/1O/w1cDnyilFU=
+    secret: bbf69c4666714a0b73852d9596987bcd
+  prod:
+    token:
+    secret:
