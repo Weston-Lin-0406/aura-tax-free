@@ -2,6 +2,9 @@ from pyfk import AbstractTable
 from sqlalchemy import *
 
 class LineChat(AbstractTable):
+    """
+    Line 顧客訊息紀錄
+    """
 
     __tablename__ = "line_chat"
 

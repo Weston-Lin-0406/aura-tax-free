@@ -33,6 +33,7 @@ app.add_middleware(
 
 app.include_router(test_router.router)
 app.include_router(line_bot_router.router)
+app.include_router(data_import_router.router)
 
 @app.exception_handler(Exception)
 def app_exception_handler(request: Request, error: Exception):

@@ -3,6 +3,9 @@ from sqlalchemy import *
 
 
 class Customer(AbstractTable):
+    """
+    顧客資料
+    """
 
     __tablename__ = "customer"
 
