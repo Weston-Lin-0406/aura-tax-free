@@ -5,10 +5,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pyfk import get_logger, create_table
 from routers import *
+from scheduler import *
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     create_table()
+
+    # start scheduler
+    download_customer_scheduler.start()
+
     yield
 
 app = FastAPI(

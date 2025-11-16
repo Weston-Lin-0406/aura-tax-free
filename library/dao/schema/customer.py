@@ -2,7 +2,7 @@ from pyfk import AbstractTable
 from sqlalchemy import *
 
 
-class Customner(AbstractTable):
+class Customer(AbstractTable):
 
     __tablename__ = "customer"
 
@@ -10,10 +10,10 @@ class Customner(AbstractTable):
 
     name = Column(String(length=50), nullable=False)
 
-    avatar = Column(String(length=50), nullable=False)
+    avatar_url = Column(Text, nullable=False)
 
-    def __init__(self, user_id: str, name: str, avatar: str, lm_user="system"):
+    def __init__(self, user_id: str, name: str, avatar_url: str, lm_user="system"):
         super().__init__(lm_user)
         self.user_id = user_id
         self.name = name
-        self.avatar = avatar
+        self.avatar_url = avatar_url

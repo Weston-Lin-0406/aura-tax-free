@@ -1,2 +1,2 @@
-from .customer import Customner
+from .customer import Customer
 from .line_chat import LineChat
