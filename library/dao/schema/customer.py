@@ -13,7 +13,7 @@ class Customer(AbstractTable):
 
     name = Column(String(length=50), nullable=False)
 
-    avatar_url = Column(Text, nullable=False)
+    avatar_url = Column(Text, nullable=True)
 
     def __init__(self, user_id: str, name: str, avatar_url: str, lm_user="system"):
         super().__init__(lm_user)
