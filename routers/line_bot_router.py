@@ -3,6 +3,7 @@ from fastapi import APIRouter, Request
 from pyfk import get_logger
 
 from library.dao import LineChat, LineChatDao
+from library.line_chat_lib import LineChatLib
 
 router = APIRouter(
     prefix="/line-bot",
@@ -20,5 +21,4 @@ async def hook(request: Request):
     message = event["message"]
     source = event["source"]
     if message["type"] == "text":
-        chat = LineChat(source["userId"], message["text"])
-        LineChatDao().create(chat)
+        LineChatLib().create(source["userId"], message["text"])

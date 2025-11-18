@@ -9,6 +9,9 @@ class SevenStoreDao(CrudSql[SevenStore]):
         super().__init__(db)
 
     def delete_all_store(self) -> int:
+        """
+        delete all seven store
+        """
         result = self.db.execute(delete(self.table))
         self.commit()
         return result.rowcount
