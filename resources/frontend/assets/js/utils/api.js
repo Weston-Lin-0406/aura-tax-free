@@ -4,6 +4,10 @@ const instance = axios.create();
 
 // before request
 instance.interceptors.request.use(config => {
+	if (config.url == '/login' && config.method == 'post') {
+		return config;
+	}
+
 	const token = sessionStorage.getItem('accessToken');
 	if (token) {
 		config.headers = config.headers || {};
@@ -29,6 +33,7 @@ instance.interceptors.response.use(
 		return res;
 	},
 	err => {
+		console.log(err);
 		const errRes = new ErrorResponse(err, false);
 		if (errRes.status == 401 && errRes.detail.startsWith('token')) {
 			errRes.detail = '帳號過期，請重新登入';

@@ -1,4 +1,4 @@
-import { ErrorResponse } from "./class/ErrorResponse.js";
+import api from './utils/api.js';
 import { PageElements } from "./class/PageElements.js"
 
 export class Login extends PageElements {
@@ -38,7 +38,7 @@ export class Login extends PageElements {
         params.append('username', this.usernameInput.value);
         params.append('password', this.passwordInput.value);
 
-        axios.post('/login', params, {
+        api.post('/login', params, {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -47,7 +47,9 @@ export class Login extends PageElements {
             this.setAccessToken(result.data.access_token);
             window.location.href = '/index';
         })
-        .catch(errRes => errRes.notify());
+        .catch(errRes => {
+            errRes.notify();
+        });
         
     }
 
