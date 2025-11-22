@@ -18,7 +18,8 @@ async def hook(request: Request):
     chat_dict = json.loads(body)
     log.info(chat_dict)
     event = chat_dict["events"][0]
-    message = event["message"]
-    source = event["source"]
-    if message["type"] == "text":
-        LineChatLib().create(source["userId"], message["text"])
+    if event["type"] == "message":
+        message = event["message"]
+        source = event["source"]
+        if message["type"] == "text":
+            LineChatLib().create(source["userId"], message["text"])
