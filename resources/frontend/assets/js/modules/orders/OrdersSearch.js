@@ -47,7 +47,7 @@ export class OrdersSearch extends PageElements {
      */
     eventMount() {
         // search date range
-        const startPick = flatpickr("#dateStart", {
+        const startPick = flatpickr("#searchDateStart", {
             locale: "zh_tw",
             dateFormat: "Y-m-d",
             onChange: function(selectedDates) {
@@ -58,7 +58,7 @@ export class OrdersSearch extends PageElements {
                 }
             }
         });
-        const endPick = flatpickr("#dateEnd", {
+        const endPick = flatpickr("#searchDateEnd", {
             locale: "zh_tw",
             dateFormat: "Y-m-d",
             onChange: function(selectedDates) {
