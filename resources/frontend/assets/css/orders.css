@@ -1,0 +1,16 @@
+.time {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.container {
+    max-width: 650px;
+}
+
+.btn {
+    --bs-btn-border-radius: 25px;
+}
+
+#actionBtnDiv .btn-theme {
+    height: 42px;
+}

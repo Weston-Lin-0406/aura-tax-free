@@ -9,7 +9,7 @@ class Orders(AbstractTable):
     __tablename__ = "orders"
 
     chat_uid = Column(String(length=32), ForeignKey("line_chat.uid"), nullable=True)
-    chay = relationship("LineChat")
+    chat = relationship("LineChat")
 
     user_id = Column(String(length=50), nullable=True)
 

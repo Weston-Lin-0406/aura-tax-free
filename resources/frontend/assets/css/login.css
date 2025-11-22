@@ -1,0 +1,108 @@
+#auraLogo {
+    position: relative;
+    max-width: 180px;
+    padding-left: 40px;
+}
+
+/* Logo image start */
+#auraLogo img {
+    width: 150px;
+    animation: fadeIn 2s linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/* Logo image end */
+
+/* Logo word start */
+#auraStudio {
+    font-weight: 600;
+    font-size: 40px;
+    color: #000;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideFadeIn 1s ease-out forwards;
+    animation-delay: 1s;
+}
+
+@keyframes slideFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+/* Logo word end */
+
+/* Logo star start */
+.star {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+
+    /* 預設狀態：讓元素一開始是隱藏的，等待 scale-up 動畫 */
+    transform: scale(0);
+    opacity: 0;
+    
+    /* 設置兩個動畫：scale-up (放大) 和 pause-blink (閃爍) */
+    animation-name: scale-up, pause-blink;
+
+    /* 設置每個動畫的持續時間 */
+    animation-duration: 0.5s, 4.5s; 
+
+    /* 設置播放次數：放大只播放一次，閃爍無限次 */
+    animation-iteration-count: 1, infinite;
+
+    /* 設置播放結束後的狀態：放大結束後保持最終狀態 (scale(1)) */
+    animation-fill-mode: forwards, none; 
+    
+    /* 設置延遲時間：
+        放大：2.5s 立即開始
+        閃爍：等放大動畫結束後再開始 (5.5s)
+    */
+    animation-delay: 2s, 5s; 
+    
+    /* 保持動畫平滑 */
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes scale-up {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1);
+        opacity: 1;
+        filter: brightness(2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+        filter: brightness(1);
+    }
+}
+
+@keyframes pause-blink {
+    0% { filter: brightness(1); }
+    
+    16.665% { filter: brightness(2); } 
+    
+    33.33% { filter: brightness(1); } 
+    
+    100% { filter: brightness(1); }
+}
+/* Logo star end */
+
+.input-group-text {
+    background-color: #fff;
+}

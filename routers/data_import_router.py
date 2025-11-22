@@ -1,5 +1,5 @@
-from fastapi import APIRouter, File, UploadFile
-from pyfk import CreateSuccessResponse
+from fastapi import APIRouter, Depends, File, UploadFile
+from pyfk import CreateSuccessResponse, UserRole, authorization
 
 from library.seven_store_lib import SevenStoreLib
 
@@ -10,7 +10,8 @@ router = APIRouter(
 
 
 @router.post("/seven-store", response_model=CreateSuccessResponse, description="7-11 門市匯入")
-async def seven_store(file: UploadFile = File(...)):
-    file.content_type
-    await SevenStoreLib().import_store_by_pdf(file)
+async def seven_store(
+        current_user: str = Depends(authorization.verify(UserRole.ADMIN, UserRole.OPERATOR)),
+        file: UploadFile = File(...)):
+    await SevenStoreLib().import_store_by_pdf(file, current_user)
     return CreateSuccessResponse()

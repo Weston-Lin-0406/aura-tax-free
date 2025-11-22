@@ -1,0 +1,20 @@
+.list-view-item {
+    padding: 16px 12px;
+    border-left: 4px solid transparent;
+    border-bottom: 1px solid #eee;
+}
+
+.list-view-item.active {
+    border-left-color: #c89f46;
+    background-color: #ffe9b7;
+}
+
+.list-view-item .primary {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.list-view-item .secondary {
+    color: #666;
+    font-size: 14px;
+}

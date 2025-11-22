@@ -1,0 +1,47 @@
+.navbar {
+    --bs-navbar-padding-y: 0.7rem;
+    background-color: #fff;
+}
+
+.navbar-toggler {
+    border: none !important;
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: transparent !important;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: transparent !important;
+}
+
+.navbar-toggler:focus, 
+.navbar-toggler:active {
+    box-shadow: none !important;
+    outline: 0 !important; 
+    --bs-navbar-toggler-focus-ring-box-shadow: none !important;
+}
+
+.navbar .offcanvas {
+    max-width: 70vw;
+    border-radius: 0 4rem 0 0;
+}
+
+.navbar .offcanvas-header{
+    padding-left: 1.5rem;
+    padding-top: 4rem;
+}
+
+.navbar .offcanvas-body {
+    padding-left: 1.5rem;
+    padding-top: 4rem;
+}
+
+.navbar .offcanvas-body .font-theme {
+    font-weight: normal;
+}
+
+#logout {
+    position: absolute;
+    bottom: 4rem;
+}

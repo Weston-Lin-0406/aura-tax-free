@@ -15,7 +15,7 @@ class SevenStoreLib:
         self.dao = SevenStoreDao()
         self.log = get_logger()
 
-    async def import_store_by_pdf(self, file: UploadFile):
+    async def import_store_by_pdf(self, file: UploadFile, current_user: str):
         self.log.info("Get file %s, start process.", file.filename)
 
         if file.content_type != "application/pdf":
@@ -44,7 +44,7 @@ class SevenStoreLib:
             address = chunk_list[i + 2][3:]
             phone_code = chunk_list[i + 3]
             phone_number = chunk_list[i + 4]
-            store = SevenStore(code, name, city, address, phone_code, phone_number)
+            store = SevenStore(code, name, city, address, phone_code, phone_number, current_user)
             store_list.append(store)
         
         self.log.info("Delete old stores, %d rows.", self.dao.delete_all_store())
