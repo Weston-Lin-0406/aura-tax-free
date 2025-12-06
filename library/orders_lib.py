@@ -83,10 +83,7 @@ class OrdersLib:
 
         wb = load_workbook("resources/711_shipment_import.xlsx")
         ws = wb.active
-
-        ws.protection.set_password(None)
-        ws.protection.sheet = False
-        ws.protection.enable()
+        ws.protection = None
 
         for idx, orders in enumerate(orders_list):
             ws[f"B{idx + 4}"] = "張棋斐"
