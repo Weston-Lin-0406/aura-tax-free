@@ -21,8 +21,8 @@ class OrdersLib:
         if order:
             return self.dao.create(order)
         
-        order = Orders(None, None, order_model.name, order_model.phone,
-            order_model.email, order_model.store_code, order_model.store_name, current_user)
+        order = Orders(None, None, order_model.name.strip(), order_model.phone.strip(),
+            order_model.email, order_model.store_code.strip(), order_model.store_name.strip(), current_user)
         
         return self.dao.create(order)
     
@@ -82,17 +82,22 @@ class OrdersLib:
         orders_list = self.dao.get_list_by_uids(uids)
 
         wb = load_workbook("resources/711_shipment_import.xlsx")
-        sheet = wb.active
+        ws = wb.active
+
+        ws.protection.set_password(None)
+        ws.protection.sheet = False
+        ws.protection.enable()
+
         for idx, orders in enumerate(orders_list):
-            sheet[f"B{idx + 4}"] = "張棋斐"
-            sheet[f"C{idx + 4}"] = "0983160759"
-            sheet[f"D{idx + 4}"] = "mithe9@gmail.com"
-            sheet[f"E{idx + 4}"] = "1000"
-            sheet[f"F{idx + 4}"] = orders.store_name
-            sheet[f"G{idx + 4}"] = orders.store_code
-            sheet[f"H{idx + 4}"] = orders.name
-            sheet[f"I{idx + 4}"] = orders.phone
-            sheet[f"J{idx + 4}"] = "mithe9@gmail.com"
+            ws[f"B{idx + 4}"] = "張棋斐"
+            ws[f"C{idx + 4}"] = "0983160759"
+            ws[f"D{idx + 4}"] = "mithe9@gmail.com"
+            ws[f"E{idx + 4}"] = "1000"
+            ws[f"F{idx + 4}"] = orders.store_name
+            ws[f"G{idx + 4}"] = orders.store_code
+            ws[f"H{idx + 4}"] = orders.name
+            ws[f"I{idx + 4}"] = orders.phone
+            ws[f"J{idx + 4}"] = "mithe9@gmail.com"
         
         stream = io.BytesIO()
         wb.save(stream)
