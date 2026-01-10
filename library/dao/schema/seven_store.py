@@ -12,15 +12,23 @@ class SevenStore(AbstractTable):
 
     name = Column(String(length=32), nullable=False)
 
-    city = Column(String(length=32), nullable=False)
+    city = Column(String(length=32), nullable=True)
 
-    address = Column(String(length=50), nullable=False)
+    address = Column(String(length=50), nullable=True)
 
-    phone_code = Column(String(length=3), nullable=False)
+    phone_code = Column(String(length=3), nullable=True)
 
-    phone_number = Column(String(length=10), nullable=False)
+    phone_number = Column(String(length=10), nullable=True)
 
-    def __init__(self, code: str, name: str, city: str, address: str, phone_code: str, phone_number: str, lm_user="system"):
+    def __init__(
+            self,
+            code: str,
+            name: str,
+            city: str = None,
+            address: str = None,
+            phone_code: str = None,
+            phone_number: str = None,
+            lm_user="system"):
         super().__init__(lm_user)
         self.code = code
         self.name = name

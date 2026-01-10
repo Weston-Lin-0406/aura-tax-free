@@ -7,6 +7,8 @@
 .list-view-item.active {
     border-left-color: #c89f46;
     background-color: #ffe9b7;
+    /* border-left-color: #567ee2;
+    background-color: #cdd4e48c; */
 }
 
 .list-view-item .primary {

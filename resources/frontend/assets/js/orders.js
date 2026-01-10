@@ -10,6 +10,10 @@ export class Orders extends ListView {
 
     ordersList = [];
 
+    markExportBtn = null;
+
+    delBtn = null;
+
     exportOrdersBtn = null;
 
     unExportBtn = null;
@@ -37,6 +41,8 @@ export class Orders extends ListView {
      */
     eleBind() {
         super.eleBind();
+        this.markExportBtn = document.getElementById('markExportBtn');
+        this.delBtn = document.getElementById('delBtn');
         this.exportOrdersBtn = document.getElementById('exportOrdersBtn');
         this.unExportBtn = document.getElementById('unExportBtn');
         this.ordersSearch = new OrdersSearch(() => this.reload());
@@ -49,6 +55,8 @@ export class Orders extends ListView {
      */
     eventMount() {
         super.eventMount();
+        this.markExportBtn.addEventListener('click', () => this.markOrdersExport());
+        this.delBtn.addEventListener('click', () => this.deleteOrders());
         this.unExportBtn.addEventListener('click', () => this.selectUnExportItems());
         this.exportOrdersBtn.addEventListener('click', () => this.exportOrders());
     }
@@ -137,8 +145,46 @@ export class Orders extends ListView {
         return ele.classList.contains('edit-item-btn');
     }
 
+    /**
+     * generate item complete mark
+     * 
+     * @param {boolean} isExport 
+     * @returns 
+     */
     itemCompleteBtn(isExport) {
         return isExport ? '<button class="btn btn-sm btn-theme btn-done" disabled>已完成</button>' : '';
+    }
+
+    /**
+     * mark orders export true
+     */
+    markOrdersExport() {
+        // get selected orders uid
+        const uids = this.getSelectedItemsUid();
+
+        api.post('/orders/mark-export', uids)
+        .then(res => {
+            Notify.show('已更新訂單', Notify.Type.SUCCESS);
+            this.reload();
+        })
+        .catch(errRes => errRes.notify());
+    }
+
+    /**
+     * delete orders
+     */
+    deleteOrders() {
+        // get selected orders uid
+        const uids = this.getSelectedItemsUid();
+
+        api.delete('/orders/', {
+            data: uids
+        })
+        .then(res => {
+            Notify.show('已更新訂單', Notify.Type.SUCCESS);
+            this.reload();
+        })
+        .catch(errRes => errRes.notify());;
     }
 
     selectUnExportItems() {
@@ -163,12 +209,7 @@ export class Orders extends ListView {
 
     exportOrders() {
         // get selected orders uid
-        const selected = this.listView.querySelectorAll('.active .item-content');
-        if (!selected || selected.length == 0) {
-            Notify.show('請選擇訂單', Notify.Type.WARNING);
-            return;
-        }
-        const uids = Array.from(selected).map(ele => ele.getAttribute('data-target'));
+        const uids = this.getSelectedItemsUid();
 
         // check if all selected items are done
         for (const i in this.ordersList) {
@@ -207,11 +248,23 @@ export class Orders extends ListView {
 
             // release URL
             window.URL.revokeObjectURL(url);
-
-            // reload list view
-            this.reload();
         })
         .catch(errRes => errRes.notify());
+    }
+
+    /**
+     * get selected orders uid
+     * 
+     * @returns {array}
+     */
+    getSelectedItemsUid() {
+        // get selected orders uid
+        const selected = this.listView.querySelectorAll('.active .item-content');
+        if (!selected || selected.length == 0) {
+            Notify.show('請選擇訂單', Notify.Type.WARNING);
+            return;
+        }
+        return Array.from(selected).map(ele => ele.getAttribute('data-target'));
     }
 
 }

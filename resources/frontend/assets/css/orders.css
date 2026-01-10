@@ -4,13 +4,17 @@
 }
 
 .container {
-    max-width: 650px;
+    max-width: 750px;
 }
 
 .btn {
     --bs-btn-border-radius: 25px;
 }
 
-#actionBtnDiv .btn-theme {
+#actionBtnDiv .btn-outline-theme, #actionBtnDiv .btn-theme {
     height: 42px;
+}
+
+.btn-done {
+    --bs-btn-border-radius: 5px;
 }

@@ -35,6 +35,8 @@ class OrdersDao(CrudSql[Orders]):
             end_datetime = datetime.combine(end_date, time.max)
             query = query.filter(Orders.create_time <= end_datetime)
 
+        query = query.filter(Orders.is_delete == False)
+
         return query.order_by(Orders.create_time.desc()).all()
     
     def get_list_by_uids(self, uids: List[str]) -> List[Orders]:

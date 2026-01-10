@@ -23,7 +23,11 @@ class Orders(AbstractTable):
 
     store_name = Column(String(length=32), nullable=True)
 
+    purchase = Column(String(length=100), nullable=True)
+
     is_export = Column(Boolean, default=False)
+
+    is_delete = Column(Boolean, default=False)
 
     def __init__(self, chat_uid: str, user_id: str, name: str,
             phone: str, email: str, store_code: str, store_name: str, lm_user="system"):

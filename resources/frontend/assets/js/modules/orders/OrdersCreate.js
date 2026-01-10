@@ -71,11 +71,10 @@ export class OrdersCreate extends PageElements {
         api.get(`/seven-store/${this.storeCodeInput.value}`)
         .then(result => this.storeNameInput.value = result)
         .catch(err => {
-            const errRes = new ErrorResponse(err, false);
-            if (errRes.status == 404) {
-                Notify.show(errRes.detail, Notify.Type.INFO);
+            if (err.status == 404) {
+                Notify.show(err.detail, Notify.Type.INFO);
             } else {
-                errRes.notify();
+                err.notify();
             }
         });
     }
@@ -87,7 +86,7 @@ export class OrdersCreate extends PageElements {
             storeCode = null,
             storeName = null;
 
-        const keywords = ["姓名", "電話", "收件門市", "門市店號"];
+        const keywords = ['姓名', '電話', '收件門市', '門市店號'];
         const pattern = /[:：]/;
 
         for (const line of lines) {
@@ -100,13 +99,13 @@ export class OrdersCreate extends PageElements {
 
                 const value = tmp[tmp.length - 1].trim();
 
-                if (key === "姓名") {
+                if (key === '姓名') {
                     name = value;
-                } else if (key === "電話") {
-                    phone = value;
-                } else if (key === "門市店號") {
+                } else if (key === '電話') {
+                    phone = value.replace('-', '');
+                } else if (key === '門市店號') {
                     storeCode = value;
-                } else if (key === "收件門市") {
+                } else if (key === '收件門市') {
                     storeName = value;
                 }
             }

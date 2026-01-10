@@ -5,7 +5,7 @@ from typing import List
 from fastapi import APIRouter, Body, Depends, Path, Query, Request
 from fastapi.responses import FileResponse, HTMLResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
-from pyfk import BaseResponse, CreateSuccessResponse, UserRole, authorization
+from pyfk import BaseResponse, CreateSuccessResponse, DeleteSuccessResponse, UpdateSuccessResponse, UserRole, authorization
 
 from library.dao import OrdersDao
 from library.orders_lib import OrdersLib
@@ -61,3 +61,25 @@ async def export_orders(
             "Content-Disposition": "attachment; filename=711_shipment_orders.xlsx"
         }
     )
+
+@router.post("/mark-export", response_model=UpdateSuccessResponse, description="標記訂單為已匯出")
+async def mark_export(
+        current_user: str = Depends(authorization.verify(UserRole.ADMIN, UserRole.OPERATOR)),
+        uids: List[str] = Body(...)):
+    dao = OrdersDao()
+    for uid in uids:
+        order = dao.get_by_uid(uid)
+        order.is_export = True
+        dao.update(order, current_user)
+    return UpdateSuccessResponse()
+
+@router.delete("/", response_model=DeleteSuccessResponse, description="刪除訂單(Sfot Delete)")
+async def delete_orders(
+        current_user: str = Depends(authorization.verify(UserRole.ADMIN, UserRole.OPERATOR)),
+        uids: List[str] = Body(...)):
+    dao = OrdersDao()
+    for uid in uids:
+        order = dao.get_by_uid(uid)
+        order.is_delete = True
+        dao.update(order, current_user)
+    return DeleteSuccessResponse()

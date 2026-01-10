@@ -9,6 +9,7 @@ from routers import *
 from routers import orders_router
 from routers import seven_store_router
 from scheduler import *
+from middleware import *
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -33,6 +34,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.add_middleware(AddSevenStoreMiddleware)
 
 app.mount("/assets", StaticFiles(directory="resources/frontend/assets"), name="assets")
 

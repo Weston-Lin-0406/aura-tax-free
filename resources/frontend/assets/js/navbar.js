@@ -37,12 +37,22 @@ export class Navbar extends PageElements {
                 <div class="offcanvas-body">
                     <div class="mb-4">
                         <a href="/index">
-                            <h6 class="font-theme"><i class="fa-solid fa-house me-3"></i></i>首頁</h6>
+                            <h6 class="font-theme"><i class="fa-solid fa-house me-4"></i>首頁</h6>
                         </a>
                     </div>
                     <div class="mb-4">
                         <a href="/orders/index">
-                            <h6 class="font-theme"><i class="fa-solid fa-cart-shopping me-3"></i>訂單管理</h6>
+                            <h6 class="font-theme"><i class="fa-solid fa-clipboard-list me-4"></i>訂單管理</h6>
+                        </a>
+                    </div>
+                    <div class="mb-4">
+                        <a href="#">
+                            <h6 class="font-theme"><i class="fa-solid fa-shop me-4"></i>7-11 門市</h6>
+                        </a>
+                    </div>
+                    <div class="mb-4">
+                        <a href="#">
+                            <h6 class="font-theme"><i class="fa-solid fa-user-group me-4"></i>顧客清單</h6>
                         </a>
                     </div>
                     <a href="/login" id="logout">

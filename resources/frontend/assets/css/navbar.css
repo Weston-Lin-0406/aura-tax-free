@@ -45,3 +45,7 @@
     position: absolute;
     bottom: 4rem;
 }
+
+.navbar .font-theme i {
+    width: 20px;
+}

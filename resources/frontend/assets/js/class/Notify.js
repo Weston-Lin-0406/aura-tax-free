@@ -14,7 +14,7 @@ export class Notify {
      * @param {string} message 
      * @param {string} type 
      */
-    static show(message, type = Utils.NotifyType.INFO) {
+    static show(message, type = Notify.Type.INFO) {
         const notification = document.createElement('div');
         notification.className = `alert ${type} notification`;
         notification.innerHTML = `
