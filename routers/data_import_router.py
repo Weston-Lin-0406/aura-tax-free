@@ -15,3 +15,9 @@ async def seven_store(
         file: UploadFile = File(...)):
     await SevenStoreLib().import_store_by_pdf(file, current_user)
     return CreateSuccessResponse()
+
+@router.post("/seven-store/ibon", response_model=CreateSuccessResponse, description="7-11 門市匯入(ibon)")
+async def seven_store_by_ibon(
+        current_user: str = Depends(authorization.verify(UserRole.ADMIN, UserRole.OPERATOR))):
+    await SevenStoreLib().import_store_by_ibon(current_user)
+    return CreateSuccessResponse()

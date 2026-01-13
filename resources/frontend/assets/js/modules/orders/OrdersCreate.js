@@ -46,6 +46,7 @@ export class OrdersCreate extends PageElements {
      */
     eventMount() {
         this.storeCodeInput.addEventListener('change', () => this.setStoreNameByCode());
+        this.storeNameInput.addEventListener('change', () => this.setStoreCodeByName());
         this.messageText.addEventListener('change', () => this.parseMessageTextToOrders());
         this.createForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -68,8 +69,25 @@ export class OrdersCreate extends PageElements {
             return;
         }
 
-        api.get(`/seven-store/${this.storeCodeInput.value}`)
+        api.get(`/seven-store/name/${this.storeCodeInput.value}`)
         .then(result => this.storeNameInput.value = result)
+        .catch(err => {
+            if (err.status == 404) {
+                Notify.show(err.detail, Notify.Type.INFO);
+            } else {
+                err.notify();
+            }
+        });
+    }
+
+    setStoreCodeByName() {
+        if (!this.storeNameInput.value) {
+            this.storeCodeInput.value = '';
+            return;
+        }
+
+        api.get(`/seven-store/code/${this.storeNameInput.value}`)
+        .then(result => this.storeCodeInput.value = result)
         .catch(err => {
             if (err.status == 404) {
                 Notify.show(err.detail, Notify.Type.INFO);
